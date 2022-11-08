@@ -19,7 +19,7 @@ func main() {
     command := args[0]
 
     if startsWithAnyOf(command, []string { "mvn", "./mvnw", "mvnd" }) {
-        args = append(args, "-DskipTests")
+        args = append(args, "-DskipTests", "-Dspotbugs.skip=true", "-Dcheckstyle.skip")
     } else if startsWithAnyOf(command, []string { "gradle", "./gradlew", "mvnd" }) {
         args = append(args, "-X", "test")
     }
