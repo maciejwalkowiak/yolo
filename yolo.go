@@ -28,7 +28,7 @@ func main() {
     }
 
     gradleAdditions := []string {
-        "-X",
+        "-x",
         "test",
     }
 
