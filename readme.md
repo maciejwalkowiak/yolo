@@ -12,6 +12,10 @@ $ yolo mvn package # runs mvn package -DskipTests
 $ yolo gradle build # runs gradle build -X test
 ```
 
+```bash
+yolo npm run build # if build script invokes test script, test script will temporarily be 'echo skipped' 
+```
+
 ## Installation
 
 `yolo` is published to Homebrew:
@@ -22,7 +26,7 @@ $ brew install maciejwalkowiak/tap/yolo
 
 ## Supported commands
 
-`yolo` supports following commands: `mvn`, `./mvnw`, `mvnd`, `gradle`, `gradlew`
+`yolo` supports following commands: `mvn`, `./mvnw`, `mvnd`, `gradle`, `gradlew`, `npm`, `yarn`
 
 ## How does it work
 
