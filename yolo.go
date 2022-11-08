@@ -80,16 +80,17 @@ func npmSuppressTest() bool {
         panic("No 'package.json' file found in this directory")
     }
 
+    // read in the file
     contents, _ := os.ReadFile("package.json")
-    if nil != os.WriteFile("package.json.tmp", contents, stat.Mode()) {
-        panic("Could not back up 'package.json' to 'package.json.tmp'")
-    }
 
+    // parse the json into arbitrary nested map-cast-able interface
     var packageJson interface{}
+    // return early if its not valid json
     if nil != json.Unmarshal(contents, &packageJson) {
         panic("Could not parse 'package.json'")
     }
 
+    // return early if missing scripts or scripts.test sections
     scriptsBlock := packageJson.(map[string]interface{})["scripts"]
     if nil == scriptsBlock {
         return false
@@ -100,7 +101,13 @@ func npmSuppressTest() bool {
         return false
     }
 
+    // override test task with 'skipped' message
     scriptsBlock.(map[string]interface{})["test"] = "echo skipped"
+
+    // since we have edited the package, now we can back up the original
+    if nil != os.WriteFile("package.json.tmp", contents, stat.Mode()) {
+        panic("Could not back up 'package.json' to 'package.json.tmp'")
+    }
 
     newContents, _ := json.Marshal(packageJson)
     _ = os.WriteFile("package.json", newContents, stat.Mode())
