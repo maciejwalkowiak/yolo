@@ -9,6 +9,29 @@ import("github.com/common-nighthawk/go-figure")
 import("github.com/fatih/color")
 
 func main() {
+    mavenAdditions := []string {
+        "-DskipTests",
+        "-Dspotbugs.skip=true",
+        "-Dcheckstyle.skip=true",
+        "-Dasciidoctor.skip=true",
+        "-Dcheckstyle.skip=true",
+        "-Ddocker.skip=true",
+        "-Dinvoker.skip=true",
+        "-Djacoco.skip=true",
+        "-Djapicmp.skip=true",
+        "-Djgassistant.skip=true",
+        "-Dlicense.skip=true",
+        "-Dmaven.javadoc.skip=true",
+        "-Dpmd.skip=true",
+        "-DskipITs=true",
+        "-Dmaven.test.skip=true",
+    }
+
+    gradleAdditions := []string {
+        "-X",
+        "test",
+    }
+
     myFigure := figure.NewColorFigure("YOLO", "", "cyan", true)
     myFigure.Print()
     fmt.Println("")
@@ -19,9 +42,9 @@ func main() {
     command := args[0]
 
     if startsWithAnyOf(command, []string { "mvn", "./mvnw", "mvnd" }) {
-        args = append(args, "-DskipTests", "-Dspotbugs.skip=true", "-Dcheckstyle.skip")
+        args = append(args, mavenAdditions...)
     } else if startsWithAnyOf(command, []string { "gradle", "./gradlew", "mvnd" }) {
-        args = append(args, "-X", "test")
+        args = append(args, gradleAdditions...)
     }
 
     cyan := color.New(color.FgCyan).SprintFunc()
