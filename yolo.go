@@ -82,7 +82,7 @@ func npmSuppressTest() bool {
 
     contents, _ := os.ReadFile("package.json")
     if nil != os.WriteFile("package.json.tmp", contents, stat.Mode()) {
-        panic("Could not back up package.json to package.json.tmp")
+        panic("Could not back up 'package.json' to 'package.json.tmp'")
     }
 
     var packageJson interface{}
