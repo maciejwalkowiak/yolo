@@ -1,5 +1,7 @@
 package main
 
+import "encoding/json"
+import "errors"
 import "os"
 import "os/exec"
 import "strings"
@@ -45,6 +47,10 @@ func main() {
         args = append(args, mavenAdditions...)
     } else if startsWithAnyOf(command, []string { "gradle", "./gradlew", "mvnd" }) {
         args = append(args, gradleAdditions...)
+    } else if startsWithAnyOf(command, []string { "npm", "yarn" }) {
+        if npmSuppressTest() {
+            defer npmRestoreTest()
+        }
     }
 
     cyan := color.New(color.FgCyan).SprintFunc()
@@ -66,4 +72,45 @@ func startsWithAnyOf(command string, prefixes []string) bool {
         }
     }
     return false
+}
+
+func npmSuppressTest() bool {
+    stat, err := os.Stat("package.json")
+    if errors.Is(err, os.ErrNotExist) {
+        panic("No 'package.json' file found in this directory")
+    }
+
+    contents, _ := os.ReadFile("package.json")
+    if nil != os.WriteFile("package.json.tmp", contents, stat.Mode()) {
+        panic("Could not back up package.json to package.json.tmp")
+    }
+
+    var packageJson interface{}
+    if nil != json.Unmarshal(contents, &packageJson) {
+        panic("Could not parse 'package.json'")
+    }
+
+    scriptsBlock := packageJson.(map[string]interface{})["scripts"]
+    if nil == scriptsBlock {
+        return false
+    }
+
+    testScript := scriptsBlock.(map[string]interface{})["test"]
+    if nil == testScript {
+        return false
+    }
+
+    scriptsBlock.(map[string]interface{})["test"] = "echo skipped"
+
+    newContents, _ := json.Marshal(packageJson)
+    _ = os.WriteFile("package.json", newContents, stat.Mode())
+    return true
+}
+
+func npmRestoreTest() {
+    fmt.Println("restoring")
+    e := os.Rename("package.json.tmp", "package.json")
+    if nil != e {
+        _, _ = fmt.Fprintln(os.Stderr, "Could not restore package.json, test script is still skipped")
+    }
 }
