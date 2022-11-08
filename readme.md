@@ -1,8 +1,4 @@
-     __   __   ___    _        ___
-     \ \ / /  / _ \  | |      / _ \
-      \ V /  | | | | | |     | | | |
-       | |   | |_| | | |___  | |_| |
-       |_|    \___/  |_____|  \___/
+# YOLO
 
 Life's too short for running tests. Prefix Maven or Gradle commands with `yolo` and live stress-free life!
 
