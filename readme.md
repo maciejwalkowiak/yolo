@@ -16,3 +16,11 @@ $ yolo gradle build # runs gradle build -X test
 
 `yolo` supports following commands: `mvn`, `./mvnw`, `mvnd`, `gradle`, `gradlew`
 
+## Contribute
+
+You are very welcome to contribute support for more languages/frameworks!
+
+## PS
+
+This project is made for fun. **Don't skip your tests.**
+
