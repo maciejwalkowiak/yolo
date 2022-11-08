@@ -24,6 +24,16 @@ $ brew install maciejwalkowiak/tap/yolo
 
 `yolo` supports following commands: `mvn`, `./mvnw`, `mvnd`, `gradle`, `gradlew`
 
+## How does it work
+
+You can run any command with
+
+```bash
+$ yolo <command>
+```
+
+If the command matches one of the supported commands, it decorates it with flags that cause skipping tests, style checks, static analysis etc.
+
 ## Contribute
 
 You are very welcome to contribute support for more languages/frameworks!
