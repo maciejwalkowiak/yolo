@@ -18,8 +18,6 @@ jobs:
         uses: actions/setup-go@v3
         with:
           go-version: ${{ matrix.go_version }}
-      - name: Test Pre-Publish
-        run: make test
       - name: Build with xgo
         uses: crazy-max/ghaction-xgo@v1
         with:
