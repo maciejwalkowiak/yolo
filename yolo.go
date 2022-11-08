@@ -29,7 +29,7 @@ func main() {
 
     gradleAdditions := []string {
         "-x",
-        "test",
+        "check",
     }
 
     myFigure := figure.NewColorFigure("YOLO", "", "cyan", true)
