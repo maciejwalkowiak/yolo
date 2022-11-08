@@ -16,12 +16,20 @@ release:
     owner: maciejwalkowiak
 
 distributions:
-  app:
+  yolo:
     type: NATIVE_IMAGE
     artifacts:
-      - path: bin/yolo-amd64-darwin
+      - path: bin/yolo-amd64-darwin.zip
         platform: osx-x86_64
-      - path: bin/yolo-amd64.exe
+      - path: bin/yolo-amd64.zip
         platform: windows-x86_64
-      - path: bin/yolo-amd64-linux
+      - path: bin/yolo-amd64-linux.zip
         platform: linux-aarch_64
+packagers:
+  brew:
+    formulaName: yolo
+    active: ALWAYS
+    tap:
+      owner: maciejwalkowiak
+      name: homebrew-tap
+  
