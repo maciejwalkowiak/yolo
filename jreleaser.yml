@@ -1,0 +1,27 @@
+# {{jreleaserCreationStamp}}
+project:
+  name: yolo
+  # version: defined in variable JRELEASER_PROJECT_VERSION
+  description: yolo
+  longDescription: yolo
+  authors:
+    - Maciej Walkowiak
+  license: MIT
+  links:
+    homepage: https://github.com/maciejwalkowiak/yolo
+  inceptionYear: 2022
+
+release:
+  github:
+    owner: maciejwalkowiak
+
+distributions:
+  app:
+    type: NATIVE_IMAGE
+    artifacts:
+      - path: bin/yolo-amd64-darwin
+        platform: osx-x86_64
+      - path: bin/yolo-amd64.exe
+        platform: windows-x86_64
+      - path: bin/yolo-amd64-linux
+        platform: linux-aarch_64
