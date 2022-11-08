@@ -12,6 +12,14 @@ $ yolo mvn package # runs mvn package -DskipTests
 $ yolo gradle build # runs gradle build -X test
 ```
 
+## Installation
+
+`yolo` is published to Homebrew:
+
+```bash
+$ brew install maciejwalkowiak/tap/yolo
+```
+
 ## Supported commands
 
 `yolo` supports following commands: `mvn`, `./mvnw`, `mvnd`, `gradle`, `gradlew`
