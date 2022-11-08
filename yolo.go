@@ -3,8 +3,18 @@ package main
 import "os"
 import "os/exec"
 import "strings"
+import "fmt"
+
+import("github.com/common-nighthawk/go-figure")
+import("github.com/fatih/color")
 
 func main() {
+    myFigure := figure.NewColorFigure("YOLO", "", "cyan", true)
+    myFigure.Print()
+    fmt.Println("")
+    color.Blue("================================")
+    fmt.Println("")
+
     args := os.Args[1:]
     command := args[0]
 
@@ -13,6 +23,10 @@ func main() {
     } else if startsWithAnyOf(command, []string { "gradle", "./gradlew", "mvnd" }) {
         args = append(args, "-X", "test")
     }
+
+    cyan := color.New(color.FgCyan).SprintFunc()
+
+    println(fmt.Sprintf("Running %s\n", cyan(strings.Join(args," "))))
 
     cmd := exec.Command(command, args[1:]...)
     cmd.Stdin = os.Stdin
