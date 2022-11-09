@@ -9,7 +9,7 @@ $ yolo mvn package # runs mvn package -DskipTests
 ```
 
 ```bash
-$ yolo gradle build # runs gradle build -x test
+$ yolo gradle build # runs gradle build -x check
 ```
 
 ## Installation
