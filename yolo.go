@@ -25,6 +25,7 @@ func main() {
         "-Dpmd.skip=true",
         "-DskipITs=true",
         "-Dmaven.test.skip=true",
+        "-Denforcer.skip=true",
     }
 
     gradleAdditions := []string {
