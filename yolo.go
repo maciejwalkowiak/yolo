@@ -9,8 +9,7 @@ import("github.com/common-nighthawk/go-figure")
 import("github.com/fatih/color")
 
 func main() {
-    mavenAdditions := []string {
-        "-DskipTests",
+    mavenAdditions := []string {       
         "-Dspotbugs.skip=true",
         "-Dcheckstyle.skip=true",
         "-Dasciidoctor.skip=true",
@@ -23,7 +22,6 @@ func main() {
         "-Dlicense.skip=true",
         "-Dmaven.javadoc.skip=true",
         "-Dpmd.skip=true",
-        "-DskipITs=true",
         "-Dmaven.test.skip=true",
     }
 
