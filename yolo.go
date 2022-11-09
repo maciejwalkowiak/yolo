@@ -23,6 +23,7 @@ func main() {
         "-Dmaven.javadoc.skip=true",
         "-Dpmd.skip=true",
         "-Dmaven.test.skip=true",
+        "-q",
     }
 
     gradleAdditions := []string {
