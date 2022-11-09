@@ -43,7 +43,7 @@ func main() {
 
     if startsWithAnyOf(command, []string { "mvn", "./mvnw", "mvnd" }) {
         args = append(args, mavenAdditions...)
-    } else if startsWithAnyOf(command, []string { "gradle", "./gradlew", "mvnd" }) {
+    } else if startsWithAnyOf(command, []string { "gradle", "./gradlew" }) {
         args = append(args, gradleAdditions...)
     }
 
