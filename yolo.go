@@ -13,7 +13,6 @@ func main() {
         "-Dspotbugs.skip=true",
         "-Dcheckstyle.skip=true",
         "-Dasciidoctor.skip=true",
-        "-Dcheckstyle.skip=true",
         "-Ddocker.skip=true",
         "-Dinvoker.skip=true",
         "-Djacoco.skip=true",
