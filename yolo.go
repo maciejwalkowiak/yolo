@@ -9,7 +9,7 @@ import("github.com/common-nighthawk/go-figure")
 import("github.com/fatih/color")
 
 func main() {
-    mavenAdditions := []string {       
+    mavenAdditions := []string {
         "-Dspotbugs.skip=true",
         "-Dcheckstyle.skip=true",
         "-Dasciidoctor.skip=true",
@@ -38,22 +38,33 @@ func main() {
     args := os.Args[1:]
     command := args[0]
 
-    if startsWithAnyOf(command, []string { "mvn", "./mvnw", "mvnd" }) {
-        args = append(args, mavenAdditions...)
-    } else if startsWithAnyOf(command, []string { "gradle", "./gradlew" }) {
-        args = append(args, gradleAdditions...)
+    if isGitPush(args) {
+    	run("git", "add", ".")
+		run("git", "commit", "-m", "yolo! 🤪")
+    } else {
+    	if startsWithAnyOf(command, []string { "mvn", "./mvnw", "mvnd" }) {
+            args = append(args, mavenAdditions...)
+        } else if startsWithAnyOf(command, []string { "gradle", "./gradlew" }) {
+            args = append(args, gradleAdditions...)
+        }
     }
+	run(args...)
+}
 
-    cyan := color.New(color.FgCyan).SprintFunc()
+func run(args... string) {
+	cyan := color.New(color.FgCyan).SprintFunc()
+	println(fmt.Sprintf("Running %s\n", cyan(strings.Join(args," "))))
 
-    println(fmt.Sprintf("Running %s\n", cyan(strings.Join(args," "))))
+	cmd := exec.Command(args[0], args[1:]...)
+	cmd.Stdin = os.Stdin
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
 
-    cmd := exec.Command(command, args[1:]...)
-    cmd.Stdin = os.Stdin
-    cmd.Stdout = os.Stdout
-    cmd.Stderr = os.Stderr
-    
-    _ = cmd.Run()
+	_ = cmd.Run()
+}
+
+func isGitPush(args []string) bool {
+	return len(args) > 1 && args[0] == "git" && args[1] == "push"
 }
 
 func startsWithAnyOf(command string, prefixes []string) bool {
